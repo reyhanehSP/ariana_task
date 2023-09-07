@@ -25,18 +25,31 @@
                     <div class="section-header p-2 mb-3">
                         <h6 class="d-flex align-items-center mb-0">اطلاعات شخصی</h5>
                     </div>
-                    <div class="mb-3">
-                        <label for="username" class="form-label">نام </label>
-                        <input type="text" class="form-control" id="first_name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="username" class="form-label"> نام خانوادگی</label>
-                        <input type="text" class="form-control" id="last_name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="age" class="form-label">سن</label>
-                        <input type="text" class="form-control" id="age">
-                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">
+                            <i class="bi bi-person"></i>
+                        </span>
+                        <input type="text" class="form-control" id="first_name"
+                         placeholder="نام" aria-label="first_name">
+                      </div>
+
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">
+                            <i class="bi bi-person"></i>
+                        </span>
+                        <input type="text" class="form-control" id="last_name"
+                         placeholder="نام خانوادگی" aria-label="last_name">
+                      </div>
+
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">
+                            <i class="bi bi-info-square"></i>
+                        </span>
+                        <input type="text" class="form-control" id="age"
+                         placeholder="سن" aria-label="last_name">
+                      </div>
+
                     <div class="section-header p-2 mb-3">
                         <h6 class="d-flex align-items-center mb-0">مهارت های شغلی</h5>
                     </div>
@@ -109,6 +122,8 @@
                     <div class="section-header p-2 mb-3">
                         <h6 class="d-flex align-items-center mb-0">اطلاعات شخصی</h5>
                     </div>
+
+                   
                     <div class="mb-3">
                         <label for="username" class="form-label">نام </label>
                         <input type="text" class="form-control" id="first_name_edit">
@@ -256,44 +271,7 @@ Highcharts.chart('colum-chart', {
         {
             name: 'Browsers',
             colorByPoint: true,
-            data: [
-
-                {
-                    name: 'Chrome',
-                    y: 63.06,
-                    drilldown: 'Chrome'
-                },
-                {
-                    name: 'Safari',
-                    y: 19.84,
-                    drilldown: 'Safari'
-                },
-                {
-                    name: 'Firefox',
-                    y: 4.18,
-                    drilldown: 'Firefox'
-                },
-                {
-                    name: 'Edge',
-                    y: 4.12,
-                    drilldown: 'Edge'
-                },
-                {
-                    name: 'Opera',
-                    y: 2.33,
-                    drilldown: 'Opera'
-                },
-                {
-                    name: 'Internet Explorer',
-                    y: 0.45,
-                    drilldown: 'Internet Explorer'
-                },
-                {
-                    name: 'Other',
-                    y: 1.582,
-                    drilldown: null
-                }
-            ]
+            data: JSON.parse(localStorage.getItem('user'))
         }
     ],
 

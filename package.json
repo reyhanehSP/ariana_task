@@ -1,7 +1,7 @@
 {
   "devDependencies": {
     "del": "^7.1.0",
-    "gulp": "^4.0.0"
+    "gulp": "^3.9.1"
   },
   "dependencies": {
     "bootstrap": "^5.3.1",

@@ -7,10 +7,14 @@ const uglify = require('gulp-uglify');
 
 //fonts
 gulp.task('fonts', function() {
-  return gulp.src('./assets/fonts/**/**/*') // Specify the source folder for fonts
+  return gulp.src('./assets/fonts/**/**/*',) // Specify the source folder for fonts
     .pipe(gulp.dest('dist/fonts')); // Output the fonts to the destination folder
 });
 
+gulp.task('fonts-bootstrap-icon', function() {
+  return gulp.src('./node_modules/bootstrap-icons/font/fonts/*',) // Specify the source folder for fonts
+    .pipe(gulp.dest('dist/css/fonts')); // Output the fonts to the destination folder
+});
 
 //js
 gulp.task('scripts', function() {
@@ -51,5 +55,5 @@ gulp.task('css', function () {
       .pipe(gulp.dest('./dist/css'));
 });
 gulp.task('watch', function () {
-  gulp.watch('./assets/css/*.scss',  gulp.series( 'fonts', 'scripts', 'styles' , 'css'));
+  gulp.watch('./assets/css/*.scss',  gulp.series( 'fonts', 'fonts-bootstrap-icon', 'scripts', 'styles' , 'css'));
 });
