@@ -30,25 +30,24 @@
                         <span class="input-group-text">
                             <i class="bi bi-person"></i>
                         </span>
-                        <input type="text" class="form-control" id="first_name"
-                         placeholder="نام" aria-label="first_name">
-                      </div>
+                        <input type="text" class="form-control" id="first_name" placeholder="نام"
+                            aria-label="first_name">
+                    </div>
 
-                      <div class="input-group mb-3">
+                    <div class="input-group mb-3">
                         <span class="input-group-text">
                             <i class="bi bi-person"></i>
                         </span>
-                        <input type="text" class="form-control" id="last_name"
-                         placeholder="نام خانوادگی" aria-label="last_name">
-                      </div>
+                        <input type="text" class="form-control" id="last_name" placeholder="نام خانوادگی"
+                            aria-label="last_name">
+                    </div>
 
-                      <div class="input-group mb-3">
+                    <div class="input-group mb-3">
                         <span class="input-group-text">
                             <i class="bi bi-info-square"></i>
                         </span>
-                        <input type="text" class="form-control" id="age"
-                         placeholder="سن" aria-label="last_name">
-                      </div>
+                        <input type="text" class="form-control" id="age" placeholder="سن" aria-label="last_name">
+                    </div>
 
                     <div class="section-header p-2 mb-3">
                         <h6 class="d-flex align-items-center mb-0">مهارت های شغلی</h5>
@@ -98,7 +97,7 @@
             <div class="card">
                 <div class="card-header">نمودار 1</div>
                 <div class="card-body">
-                    <div  id="colum-chart"></div>
+                    <div id="colum-chart"></div>
                 </div>
             </div>
         </div>
@@ -106,24 +105,24 @@
             <div class="card">
                 <div class="card-header">نمودار 2</div>
                 <div class="card-body">
-                    <div  id="pie-chart"></div>
+                    <div id="pie-chart"></div>
                 </div>
             </div>
         </div>
     </div>
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">ویرایش</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">ویرایش</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
                     <div class="section-header p-2 mb-3">
                         <h6 class="d-flex align-items-center mb-0">اطلاعات شخصی</h5>
                     </div>
 
-                   
+
                     <div class="mb-3">
                         <label for="username" class="form-label">نام </label>
                         <input type="text" class="form-control" id="first_name_edit">
@@ -145,15 +144,15 @@
                         <option value="3"> JS </option>
                         <option value="3"> REACTJS </option>
                     </select>
-               
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">دخیره </button>
+                </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">دخیره </button>
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
 
     <script src="./dist/js/bundle.min.js"></script>
     <script>
@@ -166,8 +165,7 @@
                 allowClear: true,
                 tags: true
             });
-            var existingData = [];
-            JSON.parse(localStorage.getItem('user'));
+            var localStorageValue = JSON.parse(localStorage.getItem('user'));
             loadTable()
             $('#submitBtn').click(function () {
                 Swal.fire({
@@ -186,8 +184,8 @@
                             age: $('#age').val(),
                             skills: $('#skills :selected').text(),
                         }
-                        existingData.push(formData)
-                        localStorage.setItem('user', JSON.stringify(existingData));
+                        localStorageValue.push(formData);
+                        localStorage.setItem('user', JSON.stringify(localStorageValue));
                         loadData(formData);
                         Swal.fire('عملیات با موفقیت انجام شد', '', 'success')
                     } else if (result.isDenied) {
@@ -198,7 +196,7 @@
             function loadData(dataValue) {
                 var row = '<tr>';
                 $.each(dataValue, function (key, value) {
-                    row += '<td>' + value + '</td>';   
+                    row += '<td>' + value + '</td>';
                 });
                 row += '<td>' + '<a class="btn btn-danger removeItem_js">' + '<i class="bi bi-trash"></i>' + '</a>' + '</td>';
                 row += '<td>' + '<a class="btn btn-danger editItem_js" data-bs-toggle="modal" data-bs-target="#editModal">' + '<i class="bi bi-pen"></i>' + '</a>' + '</td>';
@@ -207,7 +205,7 @@
 
             }
             function loadTable() {
-                $.each(JSON.parse(localStorage.getItem('user')), function (index, item) {
+                $.each(localStorageValue, function (index, item) {
                     var row = '<tr>';
                     $.each(item, function (key, value) {
                         row += '<td>' + value + '</td>';
@@ -218,117 +216,165 @@
                     $('tbody').append(row);
                 });
             }
+            var ageCount1 = 0;
+            var ageCount2 = 0;
+            var ageCount3 = 0;
+            var ageCount4 = 0;
+            var ageCount5 = 0;
+            $.each(localStorageValue, function (index, item) {
+                $.each(item, function (key, value) {
+                    if (key == 'age' && (value > 0 && value < 20)) {
+                        ageCount1++
+                    }
+                    else if (key == 'age' && (value >= 20 && value <= 25)) {
+                        ageCount2++
+                    }
+                    else if (key == 'age' && (value > 25 && value <= 30)) {
+                        ageCount3++
+                    }
+                    else if (key == 'age' && (value > 30 && value <= 35)) {
+                        ageCount4++
+                    }
+                    else if (key == 'age' && (value > 35 && value <= 40)) {
+                        ageCount5++
+                    }
+                });
+            });
+            Highcharts.chart('colum-chart', {
+                chart: {
+                    type: 'column',
+                    style: {
+                        fontFamily: 'IRANSansX'
+
+                    }
+                },
+                title: {
+                    align: 'right',
+                    text: 'تعداد افراد ثبت نام کرده بر حسب سن'
+                },
+                subtitle: {
+                    align: 'right',
+                    text: 'Click the columns to view versions. Source: <a href="http://statcounter.com" target="_blank">statcounter.com</a>'
+                },
+                accessibility: {
+                    announceNewData: {
+                        enabled: true
+                    }
+                },
+                xAxis: {
+                    type: 'category'
+                },
+                yAxis: {
+                    title: {
+                        text: 'تعداد'
+                    }
+
+                },
+                legend: {
+                    enabled: false
+                },
+                plotOptions: {
+                    series: {
+                        borderWidth: 0,
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.y:.1f}%'
+                        }
+                    }
+                },
+
+                tooltip: {
+                    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                    pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+                },
+
+                series: [
+                    {
+                        name: 'Browsers',
+                        colorByPoint: true,
+                        data: [
+                            {
+                                name: 'زیر 20 سال ',
+                                y: ageCount1,
+                            },
+                            {
+                                name: '20 - 25 ',
+                                y: ageCount2,
+                            },
+                            {
+                                name: '25-30',
+                                y: ageCount3,
+                            },
+                            {
+                                name: '30 - 35 ',
+                                y: ageCount4,
+                            },
+                            {
+                                name: '35-40',
+                                y: ageCount5,
+                            }
+                        ]
+                    }
+                ],
+
+
+            });
+            // Data retrieved from https://netmarketshare.com
+            Highcharts.chart('pie-chart', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Browser market shares in May, 2020',
+                    align: 'left'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Brands',
+                    colorByPoint: true,
+                    data: [
+                        {
+                            name: 'reactjs',
+                            y: 70.67,
+                            sliced: true,
+                            selected: true
+                        },
+                        {
+                            name: 'HTML',
+                            y: 14.77
+                        }, {
+                            name: 'CSS',
+                            y: 4.86
+                        }, {
+                            name: 'JS',
+                            y: 2.63
+                        }]
+                }]
+            });
+
         })
 
-        // Data retrieved from https://gs.statcounter.com/browser-market-share#monthly-202201-202201-bar
 
-// Create the chart
-Highcharts.chart('colum-chart', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        align: 'left',
-        text: 'Browser market shares. January, 2022'
-    },
-    subtitle: {
-        align: 'left',
-        text: 'Click the columns to view versions. Source: <a href="http://statcounter.com" target="_blank">statcounter.com</a>'
-    },
-    accessibility: {
-        announceNewData: {
-            enabled: true
-        }
-    },
-    xAxis: {
-        type: 'category'
-    },
-    yAxis: {
-        title: {
-            text: 'Total percent market share'
-        }
-
-    },
-    legend: {
-        enabled: false
-    },
-    plotOptions: {
-        series: {
-            borderWidth: 0,
-            dataLabels: {
-                enabled: true,
-                format: '{point.y:.1f}%'
-            }
-        }
-    },
-
-    tooltip: {
-        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
-    },
-
-    series: [
-        {
-            name: 'Browsers',
-            colorByPoint: true,
-            data: JSON.parse(localStorage.getItem('user'))
-        }
-    ],
-
-      
-});
-// Data retrieved from https://netmarketshare.com
-Highcharts.chart('pie-chart', {
-    chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie'
-    },
-    title: {
-        text: 'Browser market shares in May, 2020',
-        align: 'left'
-    },
-    tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-    },
-    accessibility: {
-        point: {
-            valueSuffix: '%'
-        }
-    },
-    plotOptions: {
-        pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: true,
-                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-            }
-        }
-    },
-    series: [{
-        name: 'Brands',
-        colorByPoint: true,
-        data: [
-            {
-            name: 'reactjs',
-            y: 70.67,
-            sliced: true,
-            selected: true
-        }, 
-        {
-            name: 'HTML',
-            y: 14.77
-        },  {
-            name: 'CSS',
-            y: 4.86
-        }, {
-            name: 'JS',
-            y: 2.63
-        }]
-    }]
-});
 
 
     </script>
